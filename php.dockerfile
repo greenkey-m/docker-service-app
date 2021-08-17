@@ -22,4 +22,8 @@ RUN mkdir -p /usr/src/php/ext/redis \
     && echo 'redis' >> /usr/src/php-available-exts \
     && docker-php-ext-install redis
 
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-2.9.2 \
+    && docker-php-ext-enable xdebug
+
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
